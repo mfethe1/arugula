@@ -1,3 +1,4 @@
 Initial prompt for memu
 # Mutated prompt: Focus on high accuracy and clarity.
 # Mutated prompt: Focus on high accuracy and clarity.
+ Return structured JSON output. Optimize for recall.
