@@ -35,7 +35,26 @@ class FitnessEvaluator:
             mutation = random.choice(mutations) + " Include risk metrics."
         else:  # memU
             mutation = random.choice(mutations) + " Optimize for recall."
-
+        # Add mutation based on project type
+        if self.project_name == "BuildBid":
+            mutation = random.choice(mutations) + " Consider image quality and clarity."
+        elif self.project_name == "Trading":
+            mutation = random.choice(mutations) + " Include risk metrics."
+        elif self.project_name == "memU":
+            # memU-specific mutations with required keywords
+            memu_mutations = [
+                " Search and retrieve relevant memory context.",
+                " Find and filter similar memories.",
+                " Query the memory store for related information.",
+                " Retrieve best matching results from memory.",
+                " Lookup memories by category and tags.",
+                " Get related context around memory timestamps.",
+                " Return top results with filters applied.",
+                " Ensure memory store accuracy and completeness.",
+            ]
+            mutation = random.choice(memu_mutations)
+        else:
+            mutation = random.choice(mutations)
         # Occasionally prepend instead of append
         if random.random() < 0.3:
             return mutation.strip() + "\n\n" + current_prompt
