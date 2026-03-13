@@ -176,6 +176,10 @@ def trading_fitness(prompt_text):
 
     # Try to load real trading data
     data_quality = 0.0
+    sharpe = 0.0
+    max_dd = 0.0
+    sortino = 0.0
+
     try:
         # Check for various trading data files
         for filename in [
@@ -199,7 +203,25 @@ def trading_fitness(prompt_text):
                             sharpe = (mean_ret / std_dev) * (252**0.5)
                             # Normalize Sharpe to 0-1 (good strategies are 1-3, great are 3+)
                             data_quality = min(1.0, sharpe / 3.0)
-                            break
+
+                        # Calculate Maximum Drawdown
+                        cumulative = 0
+                        peak = 0
+                        for r in returns:
+                            cumulative += r
+                            if cumulative > peak:
+                                peak = cumulative
+                            dd = (peak - cumulative) / (abs(peak) + 1)
+                            max_dd = max(max_dd, dd)
+
+                        # Calculate Sortino ratio (downside deviation only)
+                        downside_returns = [r for r in returns if r < 0]
+                        if downside_returns:
+                            downside_std = statistics.stdev(downside_returns)
+                            if downside_std > 0:
+                                sortino = (mean_ret / downside_std) * (252**0.5)
+
+                        break
     except Exception as e:
         print(f"Trading data load failed: {e}")
 
@@ -219,8 +241,11 @@ def trading_fitness(prompt_text):
         sharpe = (mean_ret / std_dev) * (252**0.5) if std_dev > 0 else 0.0
         data_quality = min(1.0, sharpe / 3.0)
 
-    # Combine prompt quality (40%) with data quality (60%)
-    score = (base_score * 0.4) + (data_quality * 0.6)
+    # Combine prompt quality (30%) with data quality (70%)
+    # Data quality now includes Sharpe (50%) and Drawdown penalty (20%)
+    drawdown_penalty = min(0.2, max_dd * 0.2)  # Penalize large drawdowns
+    score = (base_score * 0.3) + (data_quality * 0.7) - drawdown_penalty
+    score = max(0.0, min(1.0, score))  # Clamp to 0-1
 
     try:
         loop = asyncio.get_running_loop()
@@ -231,6 +256,9 @@ def trading_fitness(prompt_text):
                     "score": score,
                     "prompt_quality": base_score,
                     "data_quality": data_quality,
+                    "sharpe": sharpe,
+                    "max_drawdown": max_dd,
+                    "sortino": sortino,
                 },
             )
         )
@@ -242,6 +270,9 @@ def trading_fitness(prompt_text):
                     "score": score,
                     "prompt_quality": base_score,
                     "data_quality": data_quality,
+                    "sharpe": sharpe,
+                    "max_drawdown": max_dd,
+                    "sortino": sortino,
                 },
             )
         )
@@ -249,10 +280,96 @@ def trading_fitness(prompt_text):
     return score
 
 
+# ==========================================
+# IMPROVED: memU Fitness Functions
+# ==========================================
+
+
+def _calculate_tfidf_score(query_terms, prompt_text):
+    """Calculate TF-IDF-like relevance score between query terms and prompt."""
+    query_lower = (
+        query_terms.lower().split() if isinstance(query_terms, str) else query_terms
+    )
+    prompt_lower = prompt_text.lower()
+    if not query_lower or not prompt_lower:
+        return 0.0
+    tf_scores = [
+        min(1.0, prompt_lower.count(t) / max(1, len(query_lower))) for t in query_lower
+    ]
+    common_terms = {"the", "a", "an", "is", "are", "and", "or", "to", "for", "of"}
+    idf_boost = sum(1.0 for t in query_lower if t not in common_terms) / max(
+        1, len(query_lower)
+    )
+    return (sum(tf_scores) / len(tf_scores)) * (0.5 + 0.5 * idf_boost)
+
+
+def _calculate_semantic_threshold_score(prompt_text):
+    """Calculate semantic similarity threshold score for memory retrieval."""
+    semantic_keywords = {
+        "semantic": 0.8,
+        "embedding": 0.8,
+        "similar": 0.6,
+        "context": 0.5,
+        "related": 0.5,
+        "around": 0.4,
+        "fuzzy": 0.7,
+        "approximate": 0.7,
+        "meaning": 0.5,
+    }
+    score = sum(w for k, w in semantic_keywords.items() if k in prompt_text.lower())
+    return min(1.0, score)
+
+
+def _detect_multi_hop_retrieval(prompt_text):
+    """Detect if prompt supports multi-hop (chained) memory retrieval."""
+    prompt_lower = prompt_text.lower()
+    chain_indicators = [
+        ("then", 0.3),
+        ("next", 0.3),
+        ("after that", 0.4),
+        ("follow up", 0.4),
+        ("chain", 0.5),
+        ("cascade", 0.5),
+        ("and then", 0.3),
+        ("use result", 0.4),
+        ("pass to", 0.3),
+    ]
+    score = sum(w for p, w in chain_indicators if p in prompt_lower)
+    iterative_keywords = ["iterate", "loop", "multiple", "batch", "each"]
+    score += sum(0.2 for kw in iterative_keywords if kw in prompt_lower)
+    return min(1.0, score)
+
+
+def _calculate_memory_freshness_score(prompt_text):
+    """Calculate memory freshness scoring capability."""
+    freshness_keywords = {
+        "recent": 0.6,
+        "latest": 0.7,
+        "newest": 0.7,
+        "today": 0.5,
+        "yesterday": 0.5,
+        "last week": 0.4,
+        "last month": 0.4,
+        "timeframe": 0.3,
+        "age": 0.3,
+        "fresh": 0.5,
+        "stale": -0.2,
+        "expired": -0.2,
+    }
+    score = sum(w for k, w in freshness_keywords.items() if k in prompt_text.lower())
+    return max(0.0, min(1.0, score))
+
+
 def memu_fitness(prompt_text):
     """
     Real fitness function for memU retrieval accuracy.
     Tests prompt quality for memory retrieval tasks.
+
+    IMPROVEMENTS (2026-03-13):
+    - TF-IDF weighting for search term relevance (20%)
+    - Semantic threshold scoring (15%)
+    - Multi-hop retrieval detection (10%)
+    - Memory freshness scoring (5%)
     """
     # Quality checks for memU prompts
     quality_checks = {
@@ -278,7 +395,23 @@ def memu_fitness(prompt_text):
         ),
     }
 
-    score = sum(quality_checks.values()) / len(quality_checks)
+    # Base score from quality checks
+    base_score = sum(quality_checks.values()) / len(quality_checks)
+
+    # Calculate component scores
+    tfidf_score = _calculate_tfidf_score("search retrieve memory query", prompt_text)
+    semantic_score = _calculate_semantic_threshold_score(prompt_text)
+    multihop_score = _detect_multi_hop_retrieval(prompt_text)
+    freshness_score = _calculate_memory_freshness_score(prompt_text)
+
+    # Combine: base (50%) + tfidf (20%) + semantic (15%) + multihop (10%) + freshness (5%)
+    score = (
+        base_score * 0.50
+        + tfidf_score * 0.20
+        + semantic_score * 0.15
+        + multihop_score * 0.10
+        + freshness_score * 0.05
+    )
 
     # Try to test against actual memU service
     memu_tested = False
@@ -319,6 +452,15 @@ def memu_fitness(prompt_text):
         except Exception:
             continue
 
+    # Track component scores for NATS reporting
+    component_scores = {
+        "base": base_score,
+        "tfidf": tfidf_score,
+        "semantic": semantic_score,
+        "multihop": multihop_score,
+        "freshness": freshness_score,
+    }
+
     try:
         loop = asyncio.get_running_loop()
         loop.create_task(
@@ -326,6 +468,11 @@ def memu_fitness(prompt_text):
                 "arugula.memu.fitness_score",
                 {
                     "score": score,
+                    "base_score": base_score,
+                    "tfidf_score": tfidf_score,
+                    "semantic_score": semantic_score,
+                    "multihop_score": multihop_score,
+                    "freshness_score": freshness_score,
                     "memu_tested": memu_tested,
                     "memu_success": memu_success,
                     "prompt": prompt_text[:100],
@@ -338,6 +485,11 @@ def memu_fitness(prompt_text):
                 "arugula.memu.fitness_score",
                 {
                     "score": score,
+                    "base_score": base_score,
+                    "tfidf_score": tfidf_score,
+                    "semantic_score": semantic_score,
+                    "multihop_score": multihop_score,
+                    "freshness_score": freshness_score,
                     "memu_tested": memu_tested,
                     "memu_success": memu_success,
                     "prompt": prompt_text[:100],
