@@ -1,3 +1,5 @@
+Find and filter similar memories.
+
 Initial prompt for memu
 # Mutated prompt: Focus on high accuracy and clarity.
 # Mutated prompt: Focus on high accuracy and clarity.
