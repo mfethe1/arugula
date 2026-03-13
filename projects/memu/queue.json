@@ -1,0 +1,45 @@
+{
+  "project": "memu",
+  "updatedAt": "2026-03-13T03:22:01+00:00",
+  "items": [
+    {
+      "id": "memu-exp-1",
+      "createdAt": "2026-03-13T03:22:01+00:00",
+      "updatedAt": "2026-03-13T03:22:01+00:00",
+      "status": "completed",
+      "priority": "P0",
+      "objective": "Improve hybrid retrieval ranking for write-to-read success",
+      "successMetric": "retrieval precision@k and task success lift",
+      "artifactPath": "reviews/autoresearch/memu-retrieval-loop.md",
+      "owner": "ARUGULA",
+      "sourceReport": "bootstrap",
+      "notes": "seeded by bootstrap | run_once generated baseline packet"
+    },
+    {
+      "id": "memu-exp-2",
+      "createdAt": "2026-03-13T03:22:01+00:00",
+      "updatedAt": "2026-03-13T03:23:51+00:00",
+      "status": "completed",
+      "priority": "P0",
+      "objective": "Reduce duplicate/stale memory formation",
+      "successMetric": "lower redundancy with same or better recall",
+      "artifactPath": "reviews/autoresearch/memu-formation-loop.md",
+      "owner": "ARUGULA",
+      "sourceReport": "bootstrap",
+      "notes": "seeded by bootstrap | run_once generated baseline packet"
+    },
+    {
+      "id": "memu-exp-3",
+      "createdAt": "2026-03-13T03:22:01+00:00",
+      "updatedAt": "2026-03-13T23:05:21+00:00",
+      "status": "completed",
+      "priority": "P1",
+      "objective": "Improve cross-agent continuity through memory-linked handoff packets",
+      "successMetric": "fewer dropped threads and faster resumptions",
+      "artifactPath": "reviews/autoresearch/memu-handoff-loop.md",
+      "owner": "ARUGULA",
+      "sourceReport": "bootstrap",
+      "notes": "seeded by bootstrap | run_once generated baseline packet"
+    }
+  ]
+}
