@@ -1,0 +1,10 @@
+{
+  "project": "replace-me",
+  "experiment_id": "replace-exp-001",
+  "kind": "benchmark_report",
+  "uri": "artifacts/example.txt",
+  "note": "Short human-readable evidence note",
+  "metadata": {
+    "source": "benchmark"
+  }
+}

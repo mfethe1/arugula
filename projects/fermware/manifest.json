@@ -1,0 +1,28 @@
+{
+  "project": "fermware",
+  "title": "Fermware",
+  "priority": 1,
+  "objective": "Improve deviation detection, batch record quality, and operator usefulness.",
+  "primary_metric": "deviation_detection_audit_composite",
+  "guardrails": [
+    "false_alarms",
+    "missed_deviations",
+    "operator_friction",
+    "record_completion_lag",
+    "override_rate"
+  ],
+  "evaluation_window": "historical batch review replay 01",
+  "promotion_ladder": ["replay", "shadow", "canary", "production"],
+  "mutation_targets": [
+    "anomaly_thresholds",
+    "sop_reminder_timing",
+    "release_readiness_summary_format"
+  ],
+  "evidence_sources": [
+    "batch review histories",
+    "quality audits",
+    "operator feedback"
+  ],
+  "approval_mode": "no autonomous promotion beyond replay without explicit review artifact",
+  "rollback_rule": "revert if deviation quality does not improve or any guardrail regresses materially"
+}

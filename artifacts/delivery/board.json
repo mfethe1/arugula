@@ -1,0 +1,84 @@
+{
+  "projects": [
+    {
+      "project": "buildbid",
+      "title": "BuildBid",
+      "objective": "Improve estimate reliability and reduce embarrassing misses.",
+      "primary_metric": "estimate_accuracy_delta",
+      "promotion_ladder": [
+        "replay",
+        "shadow",
+        "canary",
+        "production"
+      ],
+      "latest_replay": null,
+      "evidence_count": 0
+    },
+    {
+      "project": "fermware",
+      "title": "Fermware",
+      "objective": "Improve deviation detection, batch record quality, and operator usefulness.",
+      "primary_metric": "deviation_detection_audit_composite",
+      "promotion_ladder": [
+        "replay",
+        "shadow",
+        "canary",
+        "production"
+      ],
+      "latest_replay": null,
+      "evidence_count": 0
+    },
+    {
+      "project": "memu",
+      "title": "memU",
+      "objective": "Improve retrieval usefulness before widening autonomous writeback behavior.",
+      "primary_metric": "retrieval_usefulness_uplift",
+      "promotion_ladder": [
+        "replay",
+        "shadow",
+        "canary",
+        "production"
+      ],
+      "latest_replay": {
+        "timestamp": "2026-03-13T03:40:00.757015+00:00",
+        "project": "memu",
+        "experiment_id": "memu-mu-001",
+        "experiment_path": "projects/memu/experiments/MU-001-fusion-weights.json",
+        "status": "completed",
+        "verify_command": "python -m arugula.cli --root . render-board",
+        "verify_exit_code": 0,
+        "verify_stdout": "{\n  \"projects\": [\n    {\n      \"project\": \"buildbid\",\n      \"title\": \"BuildBid\",\n      \"objective\": \"Improve estimate reliability and reduce embarrassing misses.\",\n      \"primary_metric\": \"estimate_accuracy_delta\",\n      \"promotion_ladder\": [\n        \"replay\",\n        \"shadow\",\n        \"canary\",\n        \"production\"\n      ],\n      \"latest_replay\": null,\n      \"evidence_count\": 0\n    },\n    {\n      \"project\": \"fermware\",\n      \"title\": \"Fermware\",\n      \"objective\": \"Improve deviation detection, batch record quality, and operator usefulness.\",\n      \"primary_metric\": \"deviation_detection_audit_composite\",\n      \"promotion_ladder\": [\n        \"replay\",\n        \"shadow\",\n        \"canary\",\n        \"production\"\n      ],\n      \"latest_replay\": null,\n      \"evidence_count\": 0\n    },\n    {\n      \"project\": \"memu\",\n      \"title\": \"memU\",\n      \"objective\": \"Improve retrieval usefulness before widening autonomous writeback behavior.\",\n      \"primary_metric\": \"retrieval_usefulness_uplift\",\n      \"promotion_ladder\": [\n        \"replay\",\n        \"shadow\",\n        \"canary\",\n        \"production\"\n      ],\n      \"latest_replay\": null,\n      \"evidence_count\": 0\n    },\n    {\n      \"project\": \"rareagent\",\n      \"title\": \"rareagent.work\",\n      \"objective\": \"Increase task completion reliability while lowering supervision burden.\",\n      \"primary_metric\": \"accepted_task_completion_rate\",\n      \"promotion_ladder\": [\n        \"replay\",\n        \"canary\",\n        \"production\"\n      ],\n      \"latest_replay\": null,\n      \"evidence_count\": 0\n    },\n    {\n      \"project\": \"trading\",\n      \"title\": \"Investment / Stock Trading\",\n      \"objective\": \"Improve risk-adjusted decision quality and orchestration quality separately.\",\n      \"primary_metric\": \"risk_adjusted_return_composite\",\n      \"promotion_ladder\": [\n        \"replay\",\n        \"paper\",\n        \"shadow\",\n        \"production\"\n      ],\n      \"latest_replay\": null,\n      \"evidence_count\": 0\n    }\n  ]\n}\n",
+        "verify_stderr": "",
+        "replay_id": "memu-memu-mu-001-20260313T034000Z"
+      },
+      "evidence_count": 2
+    },
+    {
+      "project": "rareagent",
+      "title": "rareagent.work",
+      "objective": "Increase task completion reliability while lowering supervision burden.",
+      "primary_metric": "accepted_task_completion_rate",
+      "promotion_ladder": [
+        "replay",
+        "canary",
+        "production"
+      ],
+      "latest_replay": null,
+      "evidence_count": 0
+    },
+    {
+      "project": "trading",
+      "title": "Investment / Stock Trading",
+      "objective": "Improve risk-adjusted decision quality and orchestration quality separately.",
+      "primary_metric": "risk_adjusted_return_composite",
+      "promotion_ladder": [
+        "replay",
+        "paper",
+        "shadow",
+        "production"
+      ],
+      "latest_replay": null,
+      "evidence_count": 0
+    }
+  ]
+}

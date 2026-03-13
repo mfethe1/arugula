@@ -1,0 +1,28 @@
+{
+  "project": "trading",
+  "title": "Investment / Stock Trading",
+  "priority": 1,
+  "objective": "Improve risk-adjusted decision quality and orchestration quality separately.",
+  "primary_metric": "risk_adjusted_return_composite",
+  "guardrails": [
+    "max_drawdown",
+    "concentration",
+    "turnover",
+    "slippage",
+    "regime_mismatch"
+  ],
+  "evaluation_window": "rolling replay window 01",
+  "promotion_ladder": ["replay", "paper", "shadow", "production"],
+  "mutation_targets": [
+    "evidence_weighting_by_regime",
+    "sizing_rule",
+    "thesis_breaker_escalation_rule"
+  ],
+  "evidence_sources": [
+    "historical market data",
+    "paper trading logs",
+    "drawdown reports"
+  ],
+  "approval_mode": "no autonomous promotion beyond replay without explicit review artifact",
+  "rollback_rule": "revert if risk-adjusted performance does not improve or any guardrail regresses materially"
+}

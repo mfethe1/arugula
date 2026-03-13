@@ -1,0 +1,22 @@
+{
+  "project": "replace-me",
+  "title": "Replace Me",
+  "priority": 1,
+  "objective": "Describe the system objective.",
+  "primary_metric": "replace_primary_metric",
+  "guardrails": [
+    "guardrail_one",
+    "guardrail_two"
+  ],
+  "evaluation_window": "replay batch 01",
+  "promotion_ladder": ["replay", "shadow", "canary", "production"],
+  "mutation_targets": [
+    "prompt_or_policy_target"
+  ],
+  "evidence_sources": [
+    "telemetry",
+    "human review"
+  ],
+  "approval_mode": "no autonomous promotion beyond replay without explicit review artifact",
+  "rollback_rule": "revert if the primary metric fails to improve or any guardrail regresses materially"
+}

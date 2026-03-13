@@ -1,0 +1,28 @@
+{
+  "project": "rareagent",
+  "title": "rareagent.work",
+  "priority": 1,
+  "objective": "Increase task completion reliability while lowering supervision burden.",
+  "primary_metric": "accepted_task_completion_rate",
+  "guardrails": [
+    "rework_rate",
+    "scope_violation_rate",
+    "unverifiable_completion_rate",
+    "unsafe_action_attempts",
+    "token_cost_overhead"
+  ],
+  "evaluation_window": "internal task replay batch 01",
+  "promotion_ladder": ["replay", "canary", "production"],
+  "mutation_targets": [
+    "task_decomposition_prompt",
+    "verification_checklist",
+    "completion_criteria"
+  ],
+  "evidence_sources": [
+    "internal task histories",
+    "verification logs",
+    "review artifacts"
+  ],
+  "approval_mode": "no autonomous promotion beyond replay without explicit review artifact",
+  "rollback_rule": "revert if completion rate does not improve or any guardrail regresses materially"
+}
