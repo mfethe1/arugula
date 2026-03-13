@@ -1,0 +1,12 @@
+experiment_id: rareagent-exp-001
+title: Increase completion reliability and reduce rework
+mutation_target: completion-criteria-and-verification-rules
+primary_metric: accepted_task_completion_rate
+guardrails:
+  - rework_rate
+  - scope_violation_rate
+  - unverifiable_completion_rate
+  - token_cost_per_success
+evaluation_window: internal task replay batch 01
+promotion_mode: replay
+rollback_rule: revert if completion does not improve or rework increases

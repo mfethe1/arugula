@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arugula.local/schemas/scorecard.schema.json",
+  "title": "ARUGULA Scorecard",
+  "type": "object",
+  "required": ["project", "window", "score_function", "records"],
+  "properties": {
+    "project": { "type": "string" },
+    "window": { "type": "string" },
+    "score_function": { "type": "string" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["agent_id", "layer", "primary_score", "samples", "weight"],
+        "properties": {
+          "agent_id": { "type": "string" },
+          "layer": { "type": "string" },
+          "primary_score": { "type": "number" },
+          "samples": { "type": "integer" },
+          "weight": { "type": "number" },
+          "secondary_scores": { "type": "object" },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}

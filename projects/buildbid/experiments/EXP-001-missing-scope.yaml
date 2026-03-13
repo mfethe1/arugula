@@ -1,0 +1,12 @@
+experiment_id: buildbid-exp-001
+title: Reduce missing scope and dependency conflicts
+mutation_target: scope-gap-detection-rules
+primary_metric: estimate_accuracy_delta
+guardrails:
+  - missing_scope_rate
+  - dependency_error_rate
+  - duplicate_item_rate
+  - human_edit_distance
+evaluation_window: historical replay batch 01
+promotion_mode: replay
+rollback_rule: revert if estimate accuracy does not improve or any guardrail regresses materially

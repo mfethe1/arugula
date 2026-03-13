@@ -1,0 +1,12 @@
+experiment_id: trading-exp-001
+title: Separate orchestration and specialist scoring
+mutation_target: orchestration-weighting-and-escalation-rules
+primary_metric: risk_adjusted_return_composite
+guardrails:
+  - max_drawdown
+  - concentration
+  - slippage
+  - regime_mismatch_rate
+evaluation_window: rolling replay window 01
+promotion_mode: replay
+rollback_rule: revert if drawdown worsens or risk-adjusted return does not improve

@@ -1,0 +1,12 @@
+experiment_id: memu-exp-001
+title: Improve retrieval usefulness uplift
+mutation_target: retrieval-fusion-and-salience-rules
+primary_metric: retrieval_usefulness_uplift
+guardrails:
+  - irrelevant_recall_rate
+  - missed_critical_memory_rate
+  - stale_fact_resurfacing_rate
+  - latency
+evaluation_window: benchmark replay batch 01
+promotion_mode: replay
+rollback_rule: revert if usefulness does not improve or latency/staleness regresses

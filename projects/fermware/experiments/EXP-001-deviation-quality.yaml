@@ -1,0 +1,12 @@
+experiment_id: fermware-exp-001
+title: Improve deviation detection quality and audit completeness
+mutation_target: anomaly-thresholds-and-summary-format
+primary_metric: deviation_detection_audit_composite
+guardrails:
+  - false_alarm_rate
+  - missed_deviation_rate
+  - record_completion_lag
+  - override_rate
+evaluation_window: historical batch review replay 01
+promotion_mode: replay
+rollback_rule: revert if misses or false alarms worsen materially
