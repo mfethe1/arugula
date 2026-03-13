@@ -1,6 +1,6 @@
 import asyncio
 from core.evaluator import FitnessEvaluator
-from core.nats_client import mock_nats_publish
+from core.nats_client import nats_publish as mock_nats_publish
 import os
 import base64
 import json
@@ -451,15 +451,6 @@ def memu_fitness(prompt_text):
                     break
         except Exception:
             continue
-
-    # Track component scores for NATS reporting
-    component_scores = {
-        "base": base_score,
-        "tfidf": tfidf_score,
-        "semantic": semantic_score,
-        "multihop": multihop_score,
-        "freshness": freshness_score,
-    }
 
     try:
         loop = asyncio.get_running_loop()
