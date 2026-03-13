@@ -1,1 +1,2 @@
 Initial prompt for memu
+# Mutated prompt: Focus on high accuracy and clarity.
