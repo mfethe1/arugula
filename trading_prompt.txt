@@ -2,3 +2,4 @@ Include specific field extraction details. Include risk metrics.
 
 Initial prompt for trading
 # Mutated prompt: Focus on high accuracy and clarity.
+ Extract all relevant data points. Include risk metrics.
