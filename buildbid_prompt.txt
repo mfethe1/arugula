@@ -5,3 +5,4 @@ Initial prompt for buildbid
 # Mutated prompt: Focus on high accuracy and clarity.
 # Mutated prompt: Focus on high accuracy and clarity.
  Extract all relevant data points. Consider image quality and clarity.
+ Ensure accurate value identification. Consider image quality and clarity.
