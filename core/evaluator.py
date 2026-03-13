@@ -27,9 +27,12 @@ class FitnessEvaluator:
 
             new_score = self.evaluate_prompt(new_prompt)
 
+            cwd_path = os.path.dirname(os.path.abspath(prompt_file))
+
             if new_score > baseline_score:
                 print(f"[{self.project_name}] Improvement! {baseline_score} -> {new_score}. Committing.")
-                subprocess.run(["git", "commit", "-am", f"Evolve {self.project_name} prompt: score {new_score}"], cwd=os.path.dirname(prompt_file))
+                subprocess.run(["git", "add", os.path.basename(prompt_file)], cwd=cwd_path)
+                subprocess.run(["git", "commit", "-m", f"Evolve {self.project_name} prompt: score {new_score}"], cwd=cwd_path)
             else:
                 print(f"[{self.project_name}] Degradation. {baseline_score} -> {new_score}. Reverting.")
-                subprocess.run(["git", "checkout", "--", os.path.basename(prompt_file)], cwd=os.path.dirname(prompt_file))
+                subprocess.run(["git", "checkout", "--", os.path.basename(prompt_file)], cwd=cwd_path)
