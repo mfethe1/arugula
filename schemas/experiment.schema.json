@@ -11,7 +11,10 @@
     "primary_metric",
     "guardrails",
     "evaluation_window",
-    "promotion_mode"
+    "promotion_mode",
+    "rollback_rule",
+    "approval_policy",
+    "tenant_scope"
   ],
   "properties": {
     "experiment_id": { "type": "string" },
@@ -21,7 +24,8 @@
     "primary_metric": { "type": "string" },
     "guardrails": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": { "type": "string" },
+      "minItems": 1
     },
     "evaluation_window": { "type": "string" },
     "promotion_mode": {
@@ -29,6 +33,28 @@
       "enum": ["replay", "shadow", "canary", "production"]
     },
     "rollback_rule": { "type": "string" },
+    "approval_policy": {
+      "type": "object",
+      "required": ["required", "approvers"],
+      "properties": {
+        "required": { "type": "boolean" },
+        "approvers": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "notes": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "tenant_scope": {
+      "type": "string",
+      "enum": ["single-tenant", "shared-control-plane", "not-applicable"]
+    },
+    "secret_inputs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
     "notes": { "type": "string" }
-  }
+  },
+  "additionalProperties": false
 }
