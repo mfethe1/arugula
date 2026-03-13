@@ -45,5 +45,16 @@ It generalizes the autoresearch pattern into an enterprise-grade evolution engin
 - BuildBid: missing-scope + dependency-error reduction
 - rareagent.work: completion reliability + lower rework
 - Fermware: deviation detection + audit completeness
-- trading: orchestration-vs-specialist scoring split
+- trading: orchestration-vs-specialist scoring split + paper-trading baseline ingestion
 - memU: retrieval usefulness uplift
+
+## Trading quick start
+Build the baseline scorecard from existing paper-trading sessions:
+
+```bash
+PYTHONPATH=src python3 -m arugula.cli --root . build-trading-baseline \
+  --source-dir ../trading-agents/paper_trading \
+  --experiment-id trading-exp-002
+```
+
+This writes a normalized replay dataset and a week-0 scorecard under `artifacts/trading/` so regime/sizing/escalation mutations can be compared against a real baseline instead of intuition.

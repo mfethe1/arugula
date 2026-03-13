@@ -1,0 +1,14 @@
+experiment_id: trading-exp-002
+title: Build baseline scorecard from recent paper-trading sessions
+mutation_target: data-loop-and-scorecard-baseline
+primary_metric: risk_adjusted_return_composite_proxy
+guardrails:
+  - max_drawdown
+  - concentration
+  - slippage
+  - regime_mismatch_rate
+  - approval_overfitting_rate
+evaluation_window: recent paper-trading session batch 01
+promotion_mode: replay
+verify_command: PYTHONPATH=src python3 -m arugula.cli --root . build-trading-baseline --source-dir ../trading-agents/paper_trading --experiment-id trading-exp-002
+rollback_rule: revert if baseline build fails or produces empty scorecards/normalized datasets

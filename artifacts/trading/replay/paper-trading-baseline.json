@@ -1,0 +1,168 @@
+{
+  "project": "trading",
+  "experiment_id": "trading-exp-002",
+  "source_dir": "/Users/mfethe/openclaw-shared/workspace/trading-agents/paper_trading",
+  "sessions": [
+    {
+      "session_id": "SESSION-20260306-121950",
+      "source_file": "/Users/mfethe/openclaw-shared/workspace/trading-agents/paper_trading/SESSION-20260306-121950.json",
+      "started_at": "2026-03-06T12:19:50.187688+00:00",
+      "signals": 10,
+      "analysis": 10,
+      "approved": 0,
+      "rejected": 10,
+      "executed": 0,
+      "approval_rate": 0.0,
+      "execution_rate": 0.0,
+      "avg_approved_rr": 0.0,
+      "avg_approved_conviction": 0.0,
+      "rejection_reasons": {
+        "R/R ratio 1.3 below minimum 1.5": 1,
+        "R/R ratio 1.1 below minimum 1.5": 7,
+        "R/R ratio 0.9 below minimum 1.5": 2
+      }
+    },
+    {
+      "session_id": "SESSION-20260306-142504",
+      "source_file": "/Users/mfethe/openclaw-shared/workspace/trading-agents/paper_trading/SESSION-20260306-142504.json",
+      "started_at": "2026-03-06T14:25:04.167146+00:00",
+      "signals": 10,
+      "analysis": 10,
+      "approved": 0,
+      "rejected": 10,
+      "executed": 0,
+      "approval_rate": 0.0,
+      "execution_rate": 0.0,
+      "avg_approved_rr": 0.0,
+      "avg_approved_conviction": 0.0,
+      "rejection_reasons": {
+        "R/R ratio 1.3 below minimum 1.5": 1,
+        "R/R ratio 1.1 below minimum 1.5": 7,
+        "R/R ratio 0.9 below minimum 1.5": 2
+      }
+    },
+    {
+      "session_id": "SESSION-20260309-135746",
+      "source_file": "/Users/mfethe/openclaw-shared/workspace/trading-agents/paper_trading/SESSION-20260309-135746.json",
+      "started_at": "2026-03-09T13:57:46.261236+00:00",
+      "signals": 8,
+      "analysis": 8,
+      "approved": 1,
+      "rejected": 7,
+      "executed": 1,
+      "approval_rate": 0.125,
+      "execution_rate": 1.0,
+      "avg_approved_rr": 2.0,
+      "avg_approved_conviction": 0.8,
+      "rejection_reasons": {
+        "R/R ratio 1.4 below minimum 1.5": 1,
+        "R/R ratio 1.1 below minimum 1.5": 5,
+        "R/R ratio 0.9 below minimum 1.5": 1
+      }
+    },
+    {
+      "session_id": "SESSION-20260310-165038",
+      "source_file": "/Users/mfethe/openclaw-shared/workspace/trading-agents/paper_trading/SESSION-20260310-165038.json",
+      "started_at": "2026-03-10T16:50:38.401980+00:00",
+      "signals": 5,
+      "analysis": 5,
+      "approved": 0,
+      "rejected": 5,
+      "executed": 0,
+      "approval_rate": 0.0,
+      "execution_rate": 0.0,
+      "avg_approved_rr": 0.0,
+      "avg_approved_conviction": 0.0,
+      "rejection_reasons": {
+        "R/R ratio 1.4 below minimum 1.5": 1,
+        "R/R ratio 1.1 below minimum 1.5": 3,
+        "R/R ratio 0.9 below minimum 1.5": 1
+      }
+    },
+    {
+      "session_id": "SESSION-20260311-140136",
+      "source_file": "/Users/mfethe/openclaw-shared/workspace/trading-agents/paper_trading/SESSION-20260311-140136.json",
+      "started_at": "2026-03-11T14:01:36.141451+00:00",
+      "signals": 7,
+      "analysis": 7,
+      "approved": 0,
+      "rejected": 7,
+      "executed": 0,
+      "approval_rate": 0.0,
+      "execution_rate": 0.0,
+      "avg_approved_rr": 0.0,
+      "avg_approved_conviction": 0.0,
+      "rejection_reasons": {
+        "R/R ratio 1.4 below minimum 1.5": 1,
+        "R/R ratio 1.1 below minimum 1.5": 6
+      }
+    },
+    {
+      "session_id": "SESSION-20260312-132651",
+      "source_file": "/Users/mfethe/openclaw-shared/workspace/trading-agents/paper_trading/SESSION-20260312-132651.json",
+      "started_at": "2026-03-12T13:26:51.202849+00:00",
+      "signals": 8,
+      "analysis": 8,
+      "approved": 0,
+      "rejected": 8,
+      "executed": 0,
+      "approval_rate": 0.0,
+      "execution_rate": 0.0,
+      "avg_approved_rr": 0.0,
+      "avg_approved_conviction": 0.0,
+      "rejection_reasons": {
+        "R/R ratio 1.1 below minimum 1.5": 6,
+        "R/R ratio 0.9 below minimum 1.5": 2
+      }
+    },
+    {
+      "session_id": "SESSION-20260313-132505",
+      "source_file": "/Users/mfethe/openclaw-shared/workspace/trading-agents/paper_trading/SESSION-20260313-132505.json",
+      "started_at": "2026-03-13T13:25:05.451288+00:00",
+      "signals": 10,
+      "analysis": 10,
+      "approved": 0,
+      "rejected": 10,
+      "executed": 0,
+      "approval_rate": 0.0,
+      "execution_rate": 0.0,
+      "avg_approved_rr": 0.0,
+      "avg_approved_conviction": 0.0,
+      "rejection_reasons": {
+        "R/R ratio 1.3 below minimum 1.5": 2,
+        "R/R ratio 1.1 below minimum 1.5": 4,
+        "R/R ratio 0.9 below minimum 1.5": 4
+      }
+    }
+  ],
+  "aggregates": {
+    "sessions": 7,
+    "total_signals": 58,
+    "total_analysis": 58,
+    "total_approved": 1,
+    "total_rejected": 57,
+    "total_executed": 1,
+    "avg_approval_rate": 0.017857142857142856,
+    "avg_execution_rate": 0.14285714285714285,
+    "avg_approved_rr": 2.0,
+    "avg_approved_conviction": 0.8,
+    "top_rejection_reasons": [
+      [
+        "R/R ratio 1.1 below minimum 1.5",
+        38
+      ],
+      [
+        "R/R ratio 0.9 below minimum 1.5",
+        12
+      ],
+      [
+        "R/R ratio 1.3 below minimum 1.5",
+        4
+      ],
+      [
+        "R/R ratio 1.4 below minimum 1.5",
+        3
+      ]
+    ]
+  }
+}

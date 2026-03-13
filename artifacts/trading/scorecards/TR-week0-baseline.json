@@ -1,0 +1,51 @@
+{
+  "project": "trading",
+  "window": "paper-trading-baseline-week0",
+  "score_function": "risk_adjusted_return_composite_proxy",
+  "records": [
+    {
+      "agent_id": "specialist-scouts",
+      "layer": "specialist",
+      "primary_score": 0.8,
+      "samples": 58,
+      "weight": 1.0,
+      "secondary_scores": {
+        "approval_rate": 0.0179,
+        "avg_approved_rr": 2.0,
+        "total_signals": 58
+      },
+      "notes": "Baseline specialist quality from paper-trading analysis/approval outcomes."
+    },
+    {
+      "agent_id": "risk-gate",
+      "layer": "orchestrator",
+      "primary_score": 0.1429,
+      "samples": 1,
+      "weight": 1.0,
+      "secondary_scores": {
+        "rejection_rate": 0.9828,
+        "top_rejection_reasons": {
+          "R/R ratio 1.1 below minimum 1.5": 38,
+          "R/R ratio 0.9 below minimum 1.5": 12,
+          "R/R ratio 1.3 below minimum 1.5": 4,
+          "R/R ratio 1.4 below minimum 1.5": 3
+        }
+      },
+      "notes": "How often approved ideas made it through the review/execution gate."
+    },
+    {
+      "agent_id": "trading-orchestrator",
+      "layer": "evaluation",
+      "primary_score": 0.3869,
+      "samples": 7,
+      "weight": 1.0,
+      "secondary_scores": {
+        "approval_rate": 0.0179,
+        "execution_rate": 0.1429,
+        "avg_approved_rr": 2.0,
+        "total_executed": 1
+      },
+      "notes": "Week-0 proxy baseline before real PnL-linked scorecards are wired in."
+    }
+  ]
+}

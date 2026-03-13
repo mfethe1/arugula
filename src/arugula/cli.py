@@ -13,6 +13,7 @@ from .nats import NatsBus
 from .projects import PROJECTS
 from .replay import run_replay
 from .templates import install_templates
+from .trading_autoresearch import build_trading_baseline
 
 
 def cmd_init(root: Path) -> None:
@@ -112,6 +113,11 @@ def cmd_install_templates(root: Path) -> None:
     print(json.dumps({"written": written}, indent=2))
 
 
+def cmd_build_trading_baseline(root: Path, source_dir: str = "", experiment_id: str = "trading-exp-002") -> None:
+    result = build_trading_baseline(root, source_dir=source_dir or None, experiment_id=experiment_id)
+    print(json.dumps(result.__dict__, indent=2))
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="ARUGULA evolution control plane")
     parser.add_argument("--root", default=".", help="Repo root")
@@ -153,6 +159,10 @@ def main() -> None:
     rp.add_argument("--verify", default="")
     rp.add_argument("--timeout", type=int, default=600)
 
+    tb = sub.add_parser("build-trading-baseline")
+    tb.add_argument("--source-dir", default="")
+    tb.add_argument("--experiment-id", default="trading-exp-002")
+
     sub.add_parser("render-board")
 
     args = parser.parse_args()
@@ -174,6 +184,8 @@ def main() -> None:
         cmd_attach_evidence(args.project, args.experiment, args.kind, args.uri, root, note=args.note)
     elif args.cmd == "replay":
         cmd_replay(args.project, args.experiment, root, verify=args.verify, timeout=args.timeout)
+    elif args.cmd == "build-trading-baseline":
+        cmd_build_trading_baseline(root, source_dir=args.source_dir, experiment_id=args.experiment_id)
     elif args.cmd == "render-board":
         cmd_render_board(root)
 
