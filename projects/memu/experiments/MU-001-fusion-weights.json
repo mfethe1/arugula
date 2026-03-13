@@ -1,0 +1,17 @@
+{
+  "experiment_id": "memu-mu-001",
+  "project": "memu",
+  "title": "Improve retrieval usefulness uplift via fusion-weight tuning",
+  "mutation_target": "retrieval_fusion_weights",
+  "primary_metric": "retrieval_usefulness_uplift",
+  "guardrails": [
+    "irrelevant_recall_rate",
+    "missed_critical_memory_rate",
+    "stale_fact_resurfacing_rate",
+    "latency_ms_p95"
+  ],
+  "evaluation_window": "benchmark replay batch 01",
+  "promotion_mode": "replay",
+  "rollback_rule": "revert if usefulness uplift <= 0 or if stale recall/latency regress materially",
+  "notes": "Prioritize retrieval quality before changing writeback behavior. Compare baseline fusion against candidate weighted fusion strategies on the same judged benchmark set."
+}

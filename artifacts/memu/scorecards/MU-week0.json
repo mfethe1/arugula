@@ -1,0 +1,21 @@
+{
+  "project": "memu",
+  "window": "week0-baseline",
+  "score_function": "retrieval_usefulness_uplift",
+  "records": [
+    {
+      "agent_id": "retrieval-fusion-orchestrator",
+      "layer": "orchestrator",
+      "primary_score": 0.0,
+      "samples": 0,
+      "weight": 1.0,
+      "secondary_scores": {
+        "irrelevant_recall_rate": 0.0,
+        "missed_critical_memory_rate": 0.0,
+        "stale_fact_resurfacing_rate": 0.0,
+        "latency_ms_p95": 0.0
+      },
+      "notes": "Baseline stub; populate after first judged replay run."
+    }
+  ]
+}

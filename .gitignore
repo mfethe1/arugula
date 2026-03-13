@@ -6,3 +6,6 @@ runs/*
 !runs/.gitkeep
 artifacts/*
 !artifacts/.gitkeep
+!artifacts/*/
+!artifacts/*/*
+!artifacts/*/*/*

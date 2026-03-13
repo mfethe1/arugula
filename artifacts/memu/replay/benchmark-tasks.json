@@ -1,0 +1,37 @@
+[
+  {
+    "task_id": "memu-bench-001",
+    "category": "project-memory",
+    "query": "What is the next slice for memU durability work?",
+    "expected_signals": [
+      "Temporal workflow wrapping memU read/append",
+      "worker wiring",
+      "replay determinism"
+    ],
+    "success_definition": "retrieved context should surface the durability blockers and immediate next slice without stale or unrelated data"
+  },
+  {
+    "task_id": "memu-bench-002",
+    "category": "ops-memory",
+    "query": "What are the known memory search failure modes and fallbacks?",
+    "expected_signals": [
+      "embedding quota exhausted can disable memory_search",
+      "fallback to direct file reads",
+      "auth/config gap should be logged"
+    ],
+    "success_definition": "retrieval should surface failure mode plus the operational fallback path"
+  },
+  {
+    "task_id": "memu-bench-003",
+    "category": "product-memory",
+    "query": "What enterprise-grade improvements should memU optimize for?",
+    "expected_signals": [
+      "retrieval usefulness",
+      "latency",
+      "dedupe/contradiction handling",
+      "tenant isolation",
+      "provenance"
+    ],
+    "success_definition": "retrieval should surface quality and governance themes relevant to productization"
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "project": "memu",
+  "title": "memU",
+  "priority": 1,
+  "objective": "Improve retrieval usefulness before widening autonomous writeback behavior.",
+  "primary_metric": "retrieval_usefulness_uplift",
+  "guardrails": [
+    "irrelevant_recall_rate",
+    "missed_critical_memory_rate",
+    "stale_fact_resurfacing_rate",
+    "latency_ms_p95",
+    "token_cost_per_useful_retrieval"
+  ],
+  "evaluation_window": "benchmark replay batch 01",
+  "promotion_ladder": ["replay", "shadow", "canary", "production"],
+  "mutation_targets": [
+    "retrieval_fusion_weights",
+    "salience_thresholds",
+    "chunking_policy",
+    "writeback_rules"
+  ],
+  "evidence_sources": [
+    "retrieval benchmark tasks",
+    "downstream task outcomes",
+    "latency logs",
+    "duplicate/staleness counters"
+  ],
+  "approval_mode": "no autonomous promotion beyond replay without explicit review artifact",
+  "rollback_rule": "revert if usefulness uplift is absent or any guardrail materially regresses"
+}
