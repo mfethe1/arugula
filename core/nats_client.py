@@ -29,15 +29,14 @@ class NATSClient:
             print("[NATS] nats-py not installed, using mock client")
             return False
 
-        for url in NATS_URLS:
-            try:
-                self.client = await nats.connect(url.strip())
-                self.connected = True
-                print(f"[NATS] Connected to {url.strip()}")
-                return True
-            except Exception as e:
-                print(f"[NATS] Connection failed for {url.strip()}: {e}")
-                
+        try:
+            self.client = await nats.connect(servers=NATS_URLS, max_reconnect_attempts=3, connect_timeout=2)
+            self.connected = True
+            print(f"[NATS] Connected to cluster: {NATS_URLS}")
+            return True
+        except Exception as e:
+            print(f"[NATS] Connection failed to all servers: {e}")
+            
         print("[NATS] All connections failed, using mock client")
         self.connected = False
         return False
