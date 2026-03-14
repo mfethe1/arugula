@@ -11,8 +11,8 @@ try:
 except ImportError:
     NATS_AVAILABLE = False
 
-# NATS configuration from environment or defaults
-NATS_URL = os.environ.get("NATS_URL", "nats://gondola.proxy.rlwy.net:22393")
+# NATS configuration from environment or defaults (supports comma-separated list for redundancy)
+NATS_URLS = os.environ.get("NATS_URLS", "nats://gondola.proxy.rlwy.net:22393,nats://localhost:4222").split(",")
 
 
 class NATSClient:
@@ -24,20 +24,23 @@ class NATSClient:
         self._connect_task = None
 
     async def connect(self):
-        """Connect to NATS server."""
+        """Connect to NATS server with redundancy."""
         if not NATS_AVAILABLE:
             print("[NATS] nats-py not installed, using mock client")
             return False
 
-        try:
-            self.client = await nats.connect(NATS_URL)
-            self.connected = True
-            print(f"[NATS] Connected to {NATS_URL}")
-            return True
-        except Exception as e:
-            print(f"[NATS] Connection failed: {e}, using mock client")
-            self.connected = False
-            return False
+        for url in NATS_URLS:
+            try:
+                self.client = await nats.connect(url.strip())
+                self.connected = True
+                print(f"[NATS] Connected to {url.strip()}")
+                return True
+            except Exception as e:
+                print(f"[NATS] Connection failed for {url.strip()}: {e}")
+                
+        print("[NATS] All connections failed, using mock client")
+        self.connected = False
+        return False
 
     async def publish(self, subject, payload):
         """Publish message to NATS subject."""
